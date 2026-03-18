@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#FFB800" />
+  <path d="M256 128 C 150 128, 128 200, 128 256 C 128 312, 150 384, 256 384 C 362 384, 384 312, 384 256 C 384 200, 362 128, 256 128 Z" fill="#050505" />
+  <text x="256" y="280" font-size="120" font-family="sans-serif" font-weight="bold" fill="#FFB800" text-anchor="middle">SBT</text>
+</svg>
