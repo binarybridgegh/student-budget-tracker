@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { format } from 'date-fns';
 
 const BudgetSetup = () => {
-  const { budgets, transactions, updateBudget } = useAppContext();
+  const { budgets, transactions, updateBudget, resetBudget } = useAppContext();
   const currentMonth = format(new Date(), 'yyyy-MM');
   
   const currentBudget = budgets.find(b => b.month === currentMonth);
@@ -27,9 +27,25 @@ const BudgetSetup = () => {
     try {
       await updateBudget(currentMonth, Number(newAmount));
       setNewAmount('');
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert('Failed to update budget');
+      alert('Failed to update budget: ' + (error.message || 'Unknown error'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = async () => {
+    if (!currentBudget) return;
+    if (!window.confirm('Are you sure you want to reset your budget for this month?')) return;
+    
+    setLoading(true);
+    try {
+      await resetBudget(currentMonth);
+      setNewAmount('');
+    } catch (error: any) {
+      console.error(error);
+      alert('Failed to reset budget: ' + (error.message || 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -87,9 +103,23 @@ const BudgetSetup = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
-          {loading ? 'Updating...' : 'Update Budget'}
-        </button>
+        <div className="flex-row gap-2" style={{ marginTop: '1rem' }}>
+          <button type="submit" className="btn btn-primary flex-1" disabled={loading}>
+            {loading ? 'Updating...' : (currentBudget ? 'Update Budget' : 'Set Budget')}
+          </button>
+          
+          {currentBudget && (
+            <button 
+              type="button" 
+              className="btn btn-outline" 
+              style={{ color: 'var(--negative)', borderColor: 'rgba(255, 75, 75, 0.2)' }}
+              onClick={handleReset}
+              disabled={loading}
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </form>
 
       <div className="mt-4 text-center">

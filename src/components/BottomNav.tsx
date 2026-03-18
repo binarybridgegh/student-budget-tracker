@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, PlusCircle, PieChart } from 'lucide-react';
+import { Home, PlusCircle, PieChart, User } from 'lucide-react';
 
 const BottomNav = () => {
   const location = useLocation();
@@ -71,6 +71,11 @@ const BottomNav = () => {
         <Link to="/budget" className={getNavClass('/budget')}>
           <PieChart size={24} />
           <span className="text-small" style={{ fontSize: '0.7rem' }}>Budget</span>
+        </Link>
+
+        <Link to="/profile" className={getNavClass('/profile')}>
+          <User size={24} />
+          <span className="text-small" style={{ fontSize: '0.7rem' }}>Profile</span>
         </Link>
       </div>
     </>

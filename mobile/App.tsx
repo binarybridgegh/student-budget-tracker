@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView, StatusBar, Platform, Text, ActivityIndi
 import { WebView } from 'react-native-webview';
 
 // Update this to your local IP address (e.g., 172.20.10.12) which we found for you!
-const WEB_APP_URL = 'http://172.20.10.12:5173';
+const WEB_APP_URL = 'http://172.20.10.12:5174';
 
 export default function App() {
   return (

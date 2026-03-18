@@ -2,11 +2,12 @@ import { useAppContext } from '../context/AppContext';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { format } from 'date-fns';
+import Advisory from '../components/Advisory';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 
 const Dashboard = () => {
-  const { user, transactions, loading } = useAppContext();
+  const { user, profile, transactions, loading } = useAppContext();
   
   if (loading) return null;
 
@@ -69,7 +70,7 @@ const Dashboard = () => {
     <div className="page-enter-active">
       <div className="flex-row justify-between items-center mb-4" style={{ marginBottom: '1.5rem' }}>
         <div>
-          <h2 className="text-h2">Hi, {user?.email?.split('@')[0]} 👋</h2>
+          <h2 className="text-h2">Hi, {profile?.full_name || user?.email?.split('@')[0]} 👋</h2>
           <p className="text-muted">Here's your financial overview</p>
         </div>
       </div>
@@ -104,8 +105,10 @@ const Dashboard = () => {
         </div>
       )}
 
+      <Advisory />
+
       <div className="mb-4" style={{ marginBottom: '1.5rem' }}>
-        <h3 className="text-h3 mb-2" style={{ marginBottom: '1rem' }}>Recent Transactions</h3>
+        <h3 className="text-h3 mb-2" style={{ marginBottom: '1rem', marginTop: '1.5rem' }}>Recent Transactions</h3>
         
         {recentTransactions.length === 0 ? (
           <div className="card" style={{ textAlign: 'center', padding: '2rem 1rem' }}>

@@ -35,9 +35,9 @@ const AddTransaction = () => {
         date: new Date(date).toISOString()
       });
       navigate('/');
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert('Failed to add transaction');
+      alert('Failed to add transaction: ' + (error.message || 'Unknown error'));
     } finally {
       setLoading(false);
     }

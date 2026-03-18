@@ -4,6 +4,8 @@ import BottomNav from './components/BottomNav';
 import Dashboard from './pages/Dashboard';
 import AddTransaction from './pages/AddTransaction';
 import BudgetSetup from './pages/BudgetSetup';
+import Profile from './pages/Profile';
+import EditTransaction from './pages/EditTransaction';
 import Auth from './pages/Auth';
 import { AppProvider, useAppContext } from './context/AppContext';
 
@@ -35,6 +37,8 @@ const AuthenticatedApp = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<AddTransaction />} />
           <Route path="/budget" element={<BudgetSetup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-transaction/:id" element={<EditTransaction />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
