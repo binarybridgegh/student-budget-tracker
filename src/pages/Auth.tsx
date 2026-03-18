@@ -22,9 +22,10 @@ const Auth = () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
-    } catch (error: unknown) {
-      const msg = error instanceof Error ? error.message : String(error);
-      setError(msg || 'An error occurred during authentication.');
+    } catch (error: any) {
+      console.error('Supabase Auth Error:', error);
+      const msg = error.message || 'Failed to connect to authentication server.';
+      setError(`${msg} (Check if your Supabase project is paused or if your internet is blocked)`);
     } finally {
       setLoading(false);
     }
